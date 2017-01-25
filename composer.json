@@ -1,0 +1,22 @@
+{
+    "name": "drupalwxt/drupal-scaffold-docker",
+    "description": "Composer Plugin for instantiating a Docker based Drupal workflow.",
+    "type": "composer-plugin",
+    "license": "GPL-2.0+",
+    "require": {
+        "php": ">=5.4.5",
+        "composer-plugin-api": "^1.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "DrupalComposer\\DrupalScaffoldDocker\\": "src/"
+        }
+    },
+    "extra": {
+        "class": "DrupalComposer\\DrupalScaffoldDocker\\Plugin"
+    },
+    "require-dev": {
+        "composer/composer": "dev-master",
+        "phpunit/phpunit": "^4.4.0"
+    }
+}
