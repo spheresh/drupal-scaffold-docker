@@ -53,7 +53,7 @@ class Resolver {
       if (!in_array($dep, $resolved)) {
         if (!in_array($dep, $unresolved)) {
           array_push($unresolved, $dep);
-          list($resolved, $unresolved) = depResolve($dep, $items, $resolved, $unresolved);
+          list($resolved, $unresolved) = $this->depResolve($dep, $items, $resolved, $unresolved);
         }
         else {
           throw new RuntimeException("Circular dependency: $item -> $dep");
