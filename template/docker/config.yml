@@ -1,5 +1,5 @@
 docker:
-  site: {{__REPO_SHORT__}}_web
-  volume: {{__REPO_SHORT__}}_web
-  network: {{__REPO_SHORT__}}_default
-  behat_path: {{__BEHAT__}}
+    site: "{{__REPO_SHORT__}}_web"
+    volume: "{{__REPO_SHORT__}}_web"
+    network: "{{__REPO_SHORT__}}_default"
+    behat_path: "{{__BEHAT__}}"

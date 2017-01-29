@@ -14,6 +14,7 @@ use Composer\Script\Event;
 use Composer\Installer\PackageEvent;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Composer custom handler for drupal scaffold docker.
@@ -105,6 +106,7 @@ class Handler {
     $composerFile = Factory::getComposerFile();
     $dispatcher = new EventDispatcher($this->composer, $this->io);
     $filesystem = new SymfonyFilesystem();
+    $config = [];
 
     $projDir = realpath(dirname($composerFile));
     $scaffoldDir = $this->getVendorPath() . '/drupalwxt/drupal-scaffold-docker';
@@ -119,8 +121,18 @@ class Handler {
         $filesystem->mkdir($projDir);
       }
 
+      // Ensure don't overwrite custom config.
+      if ($filesystem->exists($projDir . '/docker/config.yml')) {
+        $config = Yaml::parse(file_get_contents($projDir . '/docker/config.yml'));
+      }
+
       // Mirror the docker configuration.
       $filesystem->mirror($scaffoldDir . '/template/docker', $projDir . '/docker');
+
+      // Put back the custom configuration if exists.
+      if (!empty($config)) {
+        file_put_contents($projDir . '/docker/config.yml', Yaml::dump($config));
+      }
 
       $name = explode("/", $this->composer->getPackage()->getName());
       if (isset($name)) {
