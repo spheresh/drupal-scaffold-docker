@@ -119,8 +119,9 @@ class Handler {
         $filesystem->mkdir($projDir);
       }
 
-      // Replace tokens in template files.
+      // Mirror the docker configuration.
       $filesystem->mirror($scaffoldDir . '/template/docker', $projDir . '/docker');
+
       $name = explode("/", $this->composer->getPackage()->getName());
       if (isset($name)) {
         $shortname = preg_replace('/[^A-Za-z0-9]/', '', $name[1]);
@@ -154,13 +155,18 @@ class Handler {
         }
       }
 
+      // Behat.
+      // TODO: Baseline detection.
+      $behat = '';
+
       // Docker folder.
       $finder = new Finder();
-      foreach ($finder->files()->ignoreDotFiles(FALSE)->contains('/{{__ORG__}}|{{__PROFILE__}}|{{__REPO__}}|{{__REPO_SHORT__}}/i')->in($projDir . '/docker') as $file) {
+      foreach ($finder->files()->ignoreDotFiles(FALSE)->contains('/{{__(BEHAT|PROFILE|ORG|REPO|REPO_SHORT)__}}/i')->in($projDir . '/docker') as $file) {
         $name = explode("/", $this->composer->getPackage()->getName());
         if (!empty($name)) {
-          $file_contents = str_replace("{{__ORG__}}", $name[0], $file->getContents());
+          $file_contents = str_replace("{{__BEHAT__}}", $behat, $file->getContents());
           $file_contents = str_replace("{{__PROFILE__}}", $profile, $file_contents);
+          $file_contents = str_replace("{{__ORG__}}", $name[0], $file_contents);
           $file_contents = str_replace("{{__REPO__}}", $name[1], $file_contents);
           $file_contents = str_replace("{{__REPO_SHORT__}}", $shortname, $file_contents);
           file_put_contents($file->getRealPath(), $file_contents);
@@ -171,15 +177,16 @@ class Handler {
       $finder = new Finder();
       foreach ($finder->files()->ignoreDotFiles(FALSE)->depth('== 0')->in($scaffoldDir . '/template') as $file) {
         if (!empty($name)) {
-          $file_contents = str_replace("{{__ORG__}}", $name[0], $file->getContents());
+          $file_contents = str_replace("{{__BEHAT__}}", $behat, $file->getContents());
           $file_contents = str_replace("{{__PROFILE__}}", $profile, $file_contents);
+          $file_contents = str_replace("{{__ORG__}}", $name[0], $file_contents);
           $file_contents = str_replace("{{__REPO__}}", $name[1], $file_contents);
           $file_contents = str_replace("{{__REPO_SHORT__}}", $shortname, $file_contents);
           if (!$filesystem->exists(getcwd() . '/' . $file->getFilename())) {
             file_put_contents(getcwd() . '/' . $file->getFilename(), $file_contents);
           }
           else {
-            $this->io->write('<warning>' . $file->getFilename() . ' not copied as file already exists.</warning>');
+            $this->io->write('<info>' . $file->getFilename() . ' not copied as file already exists.</info>');
           }
         }
       }
