@@ -21,12 +21,12 @@ if [ -f "${dir}/../config.yml" ]; then
     echo "No behat configuration detected exiting..."
     exit
   fi
-  behat_path="/var/www/html/${config_docker_behat_path}"
+  behat_path="/var/www/{{__DOCROOT__}}/${config_docker_behat_path}"
 else
   site="drupal_web"
   volume="drupal_web"
   network="drupal_default"
-  behat_path="/var/www/html"
+  behat_path="/var/www/{{__DOCROOT__}}"
 fi
 
 if [[ "${CI:-}" ]] ; then
@@ -42,7 +42,7 @@ docker run -i \
   -v "${PWD}":"${PWD}" \
   -v /tmp/:/tmp/ \
   -w "${behat_path}" \
-  -e BEHAT_PARAMS='{"extensions":{"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"/var/www/html"}, "drush":{"root":"/var/www/html"}}, "Behat\\MinkExtension":{"base_url" : "http://nginx", "selenium2":{"wd_host":"http://hub:4444/wd/hub"}}}}' \
+  -e BEHAT_PARAMS='{"extensions":{"Drupal\\DrupalExtension":{"drupal":{"drupal_root":"/var/www/{{__DOCROOT__}}"}, "drush":{"root":"/var/www/{{__DOCROOT__}}"}}, "Behat\\MinkExtension":{"base_url" : "http://nginx", "selenium2":{"wd_host":"http://hub:4444/wd/hub"}}}}' \
   --sig-proxy=true \
   --pid=host \
   --volumes-from "${volume}" \

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Docroot.
-cd /var/www/html/;
+cd /var/www/{{__DOCROOT__}}/;
 
 # Trap.
 if [[ $# -eq 0 ]]; then
@@ -29,19 +29,19 @@ drupal_init() {
   header Configure the initial Drupal f.s.
 
   # Set the default settings.php
-  chmod 777 /var/www/html/sites/default
+  chmod 777 /var/www/{{__DOCROOT__}}/sites/default
 
-  if [ -f /var/www/html/sites/default/settings.php ]; then
-    chmod 777 /var/www/html/sites/default/settings.php
-    rm /var/www/html/sites/default/settings.php
+  if [ -f /var/www/{{__DOCROOT__}}/sites/default/settings.php ]; then
+    chmod 777 /var/www/{{__DOCROOT__}}/sites/default/settings.php
+    rm /var/www/{{__DOCROOT__}}/sites/default/settings.php
   fi
 
-  if [ -f /var/www/html/sites/default/default.settings.php ]; then
-    chmod 777 /var/www/html/sites/default/default.settings.php
-    rm /var/www/html/sites/default/default.settings.php
+  if [ -f /var/www/{{__DOCROOT__}}/sites/default/default.settings.php ]; then
+    chmod 777 /var/www/{{__DOCROOT__}}/sites/default/default.settings.php
+    rm /var/www/{{__DOCROOT__}}/sites/default/default.settings.php
   fi
 
-  cp /var/www/docker/conf/drupal/default.settings.php /var/www/html/sites/default/default.settings.php
+  cp /var/www/docker/conf/drupal/default.settings.php /var/www/{{__DOCROOT__}}/sites/default/default.settings.php
 }
 
 # drupal_install
@@ -80,7 +80,7 @@ drupal_perm() {
   header Configure the settings.php and files directory permissions
 
   if [[ $NFS != "nfs" ]]; then
-    chown -R www-data:www-data /var/www/html/
+    chown -R www-data:www-data /var/www/{{__DOCROOT__}}/
     sleep 5
   fi
 

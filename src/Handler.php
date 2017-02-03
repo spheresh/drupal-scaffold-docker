@@ -173,10 +173,11 @@ class Handler {
 
       // Docker folder.
       $finder = new Finder();
-      foreach ($finder->files()->ignoreDotFiles(FALSE)->contains('/{{__(BEHAT|PROFILE|ORG|REPO|REPO_SHORT)__}}/i')->in($projDir . '/docker') as $file) {
+      foreach ($finder->files()->ignoreDotFiles(FALSE)->contains('/{{__(BEHAT|DOCROOT|PROFILE|ORG|REPO|REPO_SHORT)__}}/i')->in($projDir . '/docker') as $file) {
         $name = explode("/", $this->composer->getPackage()->getName());
         if (!empty($name)) {
           $file_contents = str_replace("{{__BEHAT__}}", $behat, $file->getContents());
+          $file_contents = str_replace("{{__DOCROOT__}}", $this->getWebRoot(), $file_contents);
           $file_contents = str_replace("{{__PROFILE__}}", $profile, $file_contents);
           $file_contents = str_replace("{{__ORG__}}", $name[0], $file_contents);
           $file_contents = str_replace("{{__REPO__}}", $name[1], $file_contents);
@@ -190,6 +191,7 @@ class Handler {
       foreach ($finder->files()->ignoreDotFiles(FALSE)->depth('== 0')->in($scaffoldDir . '/template') as $file) {
         if (!empty($name)) {
           $file_contents = str_replace("{{__BEHAT__}}", $behat, $file->getContents());
+          $file_contents = str_replace("{{__DOCROOT__}}", $this->getWebRoot(), $file_contents);
           $file_contents = str_replace("{{__PROFILE__}}", $profile, $file_contents);
           $file_contents = str_replace("{{__ORG__}}", $name[0], $file_contents);
           $file_contents = str_replace("{{__REPO__}}", $name[1], $file_contents);

@@ -33,7 +33,7 @@ docker run -i \
   --entrypoint=phpunit \
   -v "${PWD}":"${PWD}" \
   -v /tmp/:/tmp/ \
-  -w "/var/www/html/core" \
+  -w "/var/www/{{__DOCROOT__}}/core" \
   --sig-proxy=true \
   --pid=host \
   --volumes-from "${volume}" \

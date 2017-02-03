@@ -10,7 +10,7 @@ behat:
 	./docker/bin/behat -c behat.common.yml --colors
 
 clean:
-	rm -rf {html,vendor}
+	rm -rf {{{__DOCROOT__}},vendor}
 	rm -f composer.lock
 	composer clear-cache
 
@@ -18,8 +18,8 @@ clean_docker:
 	docker rm $$(docker ps --all -q -f status=exited)
 
 drupal_cs:
-	cp docker/conf/phpcs.xml html/core/phpcs.xml
-	cp docker/conf/phpunit.xml html/core/phpunit.xml
+	cp docker/conf/phpcs.xml {{__DOCROOT__}}/core/phpcs.xml
+	cp docker/conf/phpunit.xml {{__DOCROOT__}}/core/phpunit.xml
 
 base:
 	docker build -f docker/Dockerfile \
@@ -53,12 +53,12 @@ list:
 phpcs: drupal_cs
 	./docker/bin/phpcs --config-set installed_paths /var/www/vendor/drupal/coder/coder_sniffer
 
-	./docker/bin/phpcs --standard=/var/www/html/core/phpcs.xml \
+	./docker/bin/phpcs --standard=/var/www/{{__DOCROOT__}}/core/phpcs.xml \
               --extensions=php,module,inc,install,test,profile,theme \
               --report=full \
               --colors \
-              /var/www/html/modules/custom \
-              /var/www/html/themes/custom
+              /var/www/{{__DOCROOT__}}/modules/custom \
+              /var/www/{{__DOCROOT__}}/themes/custom
 
 phpunit:
 	./docker/bin/phpunit --colors=always \

@@ -229,7 +229,7 @@ Lint all of the Docker files:
 Run `PHPCS` + `PHPUnit`:
 
 ```sh
-./docker/bin/phpcs --standard=/var/www/html/core/phpcs.xml
+./docker/bin/phpcs --standard=/var/www/{{__DOCROOT__}}/core/phpcs.xml
 
 ./docker/bin/phpunit --colors=always \
                      --testsuite=kernel \

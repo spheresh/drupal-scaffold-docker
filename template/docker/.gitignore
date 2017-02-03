@@ -6,7 +6,7 @@ files_private/
 
 # Composer files
 composer.lock
-html
+{{__DOCROOT__}}
 vendor
 */*/*/vendor
 */*/vendor

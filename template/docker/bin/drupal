@@ -38,7 +38,7 @@ docker run -i \
   -v "${PWD}":"${PWD}" \
   -v "${PWD}/docker/conf/console":"/root/.console" \
   -v /tmp/:/tmp/ \
-  -w "/var/www/html" \
+  -w "/var/www/{{__DOCROOT__}}" \
   -e HTTP_PROXY=$HTTP_PROXY \
   -e HTTPS_PROXY=$HTTP_PROXY \
   -e http_proxy=$HTTP_PROXY \

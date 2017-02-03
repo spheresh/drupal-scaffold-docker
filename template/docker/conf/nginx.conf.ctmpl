@@ -21,7 +21,7 @@ http {
       listen [::]:80;
 
       # Filesystem root of the site and index with fallback.
-      root /var/www/html;
+      root /var/www/{{__DOCROOT__}};
       index index.php index.html index.htm;
 
       # Make site accessible from http://drupal.dev;

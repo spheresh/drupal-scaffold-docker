@@ -40,7 +40,7 @@ docker run -i \
   --volumes-from "${volume}" \
   --net "${network}" \
   --rm \
-  "${image}" /var/www/html/core/scripts/run-tests.sh --php /usr/local/bin/php \
+  "${image}" /var/www/{{__DOCROOT__}}/core/scripts/run-tests.sh --php /usr/local/bin/php \
                                                      --url http://$DOMAIN \
                                                      --color \
                                                      --verbose \

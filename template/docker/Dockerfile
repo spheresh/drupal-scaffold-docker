@@ -30,7 +30,7 @@ RUN composer global require "hirak/prestissimo:^0.3" && \
                      --no-dev
 
 # Permissions.
-WORKDIR /var/www/html
+WORKDIR /var/www/{{__DOCROOT__}}
 RUN chown -R www-data:www-data *
 
 # Drush.

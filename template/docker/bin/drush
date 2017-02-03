@@ -37,7 +37,7 @@ docker run -i \
   --entrypoint=drush \
   -v "${PWD}":"${PWD}" \
   -v /tmp/:/tmp/ \
-  -w "/var/www/html" \
+  -w "/var/www/{{__DOCROOT__}}" \
   -e HTTP_PROXY=$HTTP_PROXY \
   -e HTTPS_PROXY=$HTTP_PROXY \
   -e http_proxy=$HTTP_PROXY \

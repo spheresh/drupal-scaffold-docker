@@ -14,7 +14,7 @@ file located in the `template/docker` directory or by clicking the link below:
 docker scaffold files to work with a `composer.json` file.
 
 It is required that the vendor directory be placed in its default location
-at the project root and that the webroot directory name is `html`.
+at the project root and that the webroot directory name is in the composer file.
 `drupal-scaffold-docker` will generate a `docker` folder along with several
 controller files (see detailed documentation) in your project root. Currently
 the package will only install whenever the `drupal/core` package is installed

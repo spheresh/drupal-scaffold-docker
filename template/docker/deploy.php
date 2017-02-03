@@ -24,16 +24,16 @@ set('bin/composer', function () {
 
 //Drupal 8 shared dirs
 set('shared_dirs', [
-    'html/sites/{{drupal_site}}/files',
+    '{{__DOCROOT__}}/sites/{{drupal_site}}/files',
 ]);
 //Drupal 8 shared files
 set('shared_files', [
-    'html/sites/{{drupal_site}}/settings.php',
-    'html/sites/{{drupal_site}}/services.yml',
+    '{{__DOCROOT__}}/sites/{{drupal_site}}/settings.php',
+    '{{__DOCROOT__}}/sites/{{drupal_site}}/services.yml',
 ]);
 //Drupal 8 Writable dirs
 set('writable_dirs', [
-    'html/sites/{{drupal_site}}/files',
+    '{{__DOCROOT__}}/sites/{{drupal_site}}/files',
 ]);
 
 // Server

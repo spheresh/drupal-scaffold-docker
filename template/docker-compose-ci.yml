@@ -80,7 +80,7 @@ services:
       - CONSUL_KV_PREFIX=nginx
       - CONSUL_PORT_8500_TCP_ADDR=consul
     volumes:
-     - ./html:/var/www/html
+     - ./{{__DOCROOT__}}:/var/www/{{__DOCROOT__}}
      - ./docker/conf/nginx.conf.ctmpl:/etc/nginx/nginx.conf.ctmpl
     ports:
       - '80:80'

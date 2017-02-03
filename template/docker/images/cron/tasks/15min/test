@@ -2,7 +2,7 @@
 
 PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/sbin
 CRON=core-cron
-DRUPAL=/var/www/html
+DRUPAL=/var/www/{{__DOCROOT__}}
 DRUSH=`which drush`
 
 if [ ! -f $DRUSH ]
