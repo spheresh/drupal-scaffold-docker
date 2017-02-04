@@ -107,6 +107,8 @@ class Handler {
     $dispatcher = new EventDispatcher($this->composer, $this->io);
     $filesystem = new SymfonyFilesystem();
     $config = [];
+    $behat = '';
+    $files = [];
 
     $projDir = realpath(dirname($composerFile));
     $scaffoldDir = $this->getVendorPath() . '/drupalwxt/drupal-scaffold-docker';
@@ -124,6 +126,7 @@ class Handler {
       // Ensure don't overwrite custom config.
       if ($filesystem->exists($projDir . '/docker/config.yml')) {
         $config = Yaml::parse(file_get_contents($projDir . '/docker/config.yml'));
+        $behat = isset($config['docker']['behat_path']) ? $config['docker']['behat_path'] : '';
       }
 
       // Mirror the docker configuration.
@@ -134,6 +137,7 @@ class Handler {
         file_put_contents($projDir . '/docker/config.yml', Yaml::dump($config));
       }
 
+      // Ensure valid shortname.
       $name = explode("/", $this->composer->getPackage()->getName());
       if (isset($name)) {
         $shortname = preg_replace('/[^A-Za-z0-9]/', '', $name[1]);
@@ -168,8 +172,9 @@ class Handler {
       }
 
       // Behat.
-      // TODO: Baseline detection.
-      $behat = '';
+      if (!empty($behat) && !$filesystem->exists($webroot . '/' . $behat)) {
+        $behat = '';
+      }
 
       // Docker folder.
       $finder = new Finder();
@@ -200,7 +205,7 @@ class Handler {
             file_put_contents(getcwd() . '/' . $file->getFilename(), $file_contents);
           }
           else {
-            $this->io->write('<info>' . $file->getFilename() . ' not copied as file already exists.</info>');
+            $files[] = $file->getFileName();
           }
         }
       }
@@ -217,7 +222,14 @@ class Handler {
         $filesystem->copy(getcwd() . '/scripts/ScriptHandler.php', $projDir . '/docker/images/1.0-alpha1/scripts/ScriptHandler.php', TRUE);
       }
 
-      $this->io->write('<info>Successfully installed Drupal Scaffold Docker!</info>');
+      // Logger.
+      $this->io->write('<info> Successfully installed Drupal Scaffold Docker!</info>');
+      if (!empty($files)) {
+        $this->io->write('<info> The following files were not copied as already exist:</info>');
+        foreach ($files as $file) {
+          $this->io->write('  - <info>' . $file . '</info>');
+        }
+      }
     }
 
     // Call post-scaffold scripts.

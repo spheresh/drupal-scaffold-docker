@@ -65,7 +65,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase {
     $this->assertFileExists($this->tmpDir . DIRECTORY_SEPARATOR . 'docker', 'Drupal core is installed.');
     $this->assertFileExists($exampleScaffoldFile, 'Scaffold file should be automatically installed.');
     $this->fs->remove($exampleScaffoldFile);
-    $this->assertFileNotExists($exampleScaffoldFile, 'Scaffold file should not be exist.');
+    $this->assertFileNotExists($exampleScaffoldFile, 'Scaffold file should not exist.');
     $this->composer('drupal-scaffold-docker');
     $this->assertFileExists($exampleScaffoldFile, 'Scaffold file should be installed by "drupal-scaffold-docker" command.');
   }
