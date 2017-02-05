@@ -49,7 +49,7 @@ class Resolver {
    */
   public function depResolve($item, array $items, array $resolved, array $unresolved) {
     array_push($unresolved, $item);
-    foreach ($items[$item] as $dep) {
+    foreach ($items[$item]['dependencies'] as $dep) {
       if (!in_array($dep, $resolved)) {
         if (!in_array($dep, $unresolved)) {
           array_push($unresolved, $dep);

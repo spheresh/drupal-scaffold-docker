@@ -146,6 +146,7 @@ class Handler {
       // Gather installation profiles.
       $profiles = $this->getProfiles();
       $profile = 'standard';
+      $profilePath = '';
       if (!empty($profiles)) {
         $resolved = [];
         $unresolved = [];
@@ -163,17 +164,22 @@ class Handler {
           $deps = [];
           if (count($profiles[$profileTemp]) > count($deps)) {
             $deps = $profiles[$profileTemp];
+            $profilePath = $profiles[$profileTemp]['path'];
             $profileTemp = explode("/", $profileTemp);
-            if ($filesystem->exists($webroot . '/profiles/' . $profileTemp[1])) {
+            if ($filesystem->exists(realpath($profilePath))) {
               $profile = $profileTemp[1];
             }
           }
         }
       }
 
-      // Behat.
-      if (!empty($behat) && !$filesystem->exists($webroot . '/' . $behat)) {
-        $behat = '';
+      // Determine Behat location.
+      if (empty($behat) && !empty($profile)) {
+        $finder = new Finder();
+        foreach ($finder->files()->name('behat.yml')->in(realpath($profilePath)) as $file) {
+          $path = str_replace($this->getWebRoot() . '/', '', $profilePath);
+          $behat = rtrim($path . '/' . $file->getRelativePath(), '/');
+        }
       }
 
       // Docker folder.
@@ -222,7 +228,7 @@ class Handler {
         $filesystem->copy(getcwd() . '/scripts/ScriptHandler.php', $projDir . '/docker/images/1.0-alpha1/scripts/ScriptHandler.php', TRUE);
       }
 
-      // Logger.
+      // Information about the scaffold.
       $this->io->write('<info> Successfully installed Drupal Scaffold Docker!</info>');
       if (!empty($files)) {
         $this->io->write('<info> The following files were not copied as already exist:</info>');
@@ -302,14 +308,15 @@ class Handler {
     $profiles = [];
     foreach ($this->composer->getRepositoryManager()->getLocalRepository()->getPackages() as $package) {
       if ($package->getType() == 'drupal-profile') {
-        $profiles[$package->getName()] = [];
+        $profiles[$package->getName()]['dependencies'] = [];
+        $profiles[$package->getName()]['path'] = $this->composer->getInstallationManager()->getInstallPath($package);
       }
     }
     foreach ($this->composer->getRepositoryManager()->getLocalRepository()->getPackages() as $package) {
       foreach ($package->getRequires() as $link) {
         foreach ($profiles as $profile_name => $profile_dep) {
           if (in_array($link->getTarget(), array_keys($profiles)) && ($profile_name == $package->getName())) {
-            $profiles[$package->getName()][] = $link->getTarget();
+            $profiles[$package->getName()]['dependencies'][] = $link->getTarget();
           }
         }
       }
