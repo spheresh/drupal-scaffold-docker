@@ -111,7 +111,7 @@ class Handler {
     $files = [];
 
     $projDir = realpath(dirname($composerFile));
-    $scaffoldDir = $this->getVendorPath() . '/drupalwxt/drupal-scaffold-docker';
+    $scaffoldDir = $this->getVendorPath() . '/drupal-composer-ext/drupal-scaffold-docker';
     $webroot = realpath($this->getWebRoot());
 
     // Call any pre-scaffold scripts that may be defined.

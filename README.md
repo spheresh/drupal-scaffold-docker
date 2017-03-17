@@ -45,7 +45,7 @@ with several controller files (see `Architecture` above) in your project root.
 Run the following command in your composer project:
 
 ```
-composer require drupalwxt/drupal-scaffold-docker:8.x-dev PROJECT_NAME
+composer require drupal-composer-ext/drupal-scaffold-docker:8.x-dev PROJECT_NAME
 ```
 
 Once `drupal-scaffold-docker` is required by your project, it will
@@ -76,7 +76,7 @@ configuration by using `composer drupal-scaffold-docker`.
 > Note: It is currently assumed that the scaffold files will be committed to
 the repository.
 
-[ci]:                   https://travis-ci.org/drupalwxt/drupal-scaffold-docker
-[ci-badge]:             https://travis-ci.org/drupalwxt/drupal-scaffold-docker.svg?branch=8.x
+[ci]:                   https://travis-ci.org/drupal-composer-ext/drupal-scaffold-docker
+[ci-badge]:             https://travis-ci.org/drupal-composer-ext/drupal-scaffold-docker.svg?branch=8.x
 [docker-readme]:        template/docker/README.md
 [drupal-scaffold]:      https://github.com/drupal-composer/drupal-scaffold

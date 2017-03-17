@@ -96,7 +96,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase {
    */
   protected function composerJsonDefaults() {
     return [
-      'name' => 'drupalwxt/drupal-scaffold-docker-phpunit',
+      'name' => 'drupal-composer-ext/drupal-scaffold-docker-phpunit',
       'repositories' => [
         [
           'type' => 'vcs',
@@ -104,7 +104,7 @@ class PluginTest extends \PHPUnit_Framework_TestCase {
         ],
       ],
       'require' => [
-        'drupalwxt/drupal-scaffold-docker' => 'dev-master',
+        'drupal-composer-ext/drupal-scaffold-docker' => '8.x-dev',
         'composer/installers' => '^1.0.20',
         'drupal/core' => '8.2.4',
       ],

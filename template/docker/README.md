@@ -445,8 +445,8 @@ pulled to be transparently saved locally for subsequent docker pulls.
 [docker-machine-nfs]:           https://github.com/adlogix/docker-machine-nfs
 [docker-toolbox]:               https://www.docker.com/products/docker-toolbox
 [docker-drupal]:                https://github.com/drupalwxt/drupal
-[docker-drupal-scaffold]:       https://github.com/drupalwxt/drupal-scaffold-docker
-[docker-drupal-scaffold-down]:  https://github.com/drupalwxt/drupal-scaffold-docker/blob/master/src/Handler.php#L104
+[docker-drupal-scaffold]:       https://github.com/drupal-composer-ext/drupal-scaffold-docker
+[docker-drupal-scaffold-down]:  https://github.com/drupal-composer-ext/drupal-scaffold-docker/blob/8.x/src/Handler.php#L104
 [docker-registry]:              https://docs.docker.com/registry/recipes/mirror
 [docker-registry-proxy-cache]:  https://github.com/drupalwxt/registry-proxy-cache
 [drupal-site-layer]:            docker/Dockerfile

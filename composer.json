@@ -1,5 +1,5 @@
 {
-    "name": "drupalwxt/drupal-scaffold-docker",
+    "name": "drupal-composer-ext/drupal-scaffold-docker",
     "description": "Composer Plugin for instantiating a Docker based Drupal workflow.",
     "type": "composer-plugin",
     "license": "GPL-2.0+",
