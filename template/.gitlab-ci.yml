@@ -5,7 +5,7 @@ stages:
 variables:
   PROJECT_NAME: {{__ORG__}}/{{__REPO__}}
 
-image: drupalwxt/gitlab-ci
+image: sylus/gitlab-ci
 
 services:
   - docker:dind

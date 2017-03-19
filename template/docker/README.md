@@ -299,15 +299,15 @@ create an [Alpine][alpine] variant much like the PostgreSQL image.
 
 | Repository                      | Tag          | Size      |
 | ------------------------------- | ------------ | --------- |
-| drupalwxt/drupal                | latest       | 177.2 MB  |
-| drupalwxt/selenium              | hub          | 155.4 MB  |
-| drupalwxt/selenium              | node-firefox | 326.5 MB  |
+| drupalcomposer/drupal                | latest       | 177.2 MB  |
+| drupalcomposer/selenium              | hub          | 155.4 MB  |
+| drupalcomposer/selenium              | node-firefox | 326.5 MB  |
 
-- [drupalwxt/drupal][docker-drupal]
+- [drupalcomposer/drupal][docker-drupal]
 
 #### Overridden (`_/drupal`)
 
-> Note: The Dockerfile in `drupalwxt/drupal` extends from the
+> Note: The Dockerfile in `drupalcomposer/drupal` extends from the
 `drupal:fpm-alpine` container and simply provides missing support. Eventually
 this image should be ported to the Docker official library for Drupal.
 
@@ -317,7 +317,7 @@ A bare bones selenium environment built in [Alpine][alpine]. Contains both the
 [Selenium Grid Hub][selenium-grid] and [Selenium Node][selenium-node] images
 configured to run firefox.
 
-- [drupalwxt/selenium][selenium]
+- [drupalcomposer/selenium][selenium]
 
 #### Namespace change for `Helper Images`
 
@@ -444,11 +444,11 @@ pulled to be transparently saved locally for subsequent docker pulls.
 [docker-machine]:               https://www.docker.com/products/docker-machine
 [docker-machine-nfs]:           https://github.com/adlogix/docker-machine-nfs
 [docker-toolbox]:               https://www.docker.com/products/docker-toolbox
-[docker-drupal]:                https://github.com/drupalwxt/drupal
+[docker-drupal]:                https://github.com/drupal-composer-ext/drupal
 [docker-drupal-scaffold]:       https://github.com/drupal-composer-ext/drupal-scaffold-docker
 [docker-drupal-scaffold-down]:  https://github.com/drupal-composer-ext/drupal-scaffold-docker/blob/8.x/src/Handler.php#L104
 [docker-registry]:              https://docs.docker.com/registry/recipes/mirror
-[docker-registry-proxy-cache]:  https://github.com/drupalwxt/registry-proxy-cache
+[docker-registry-proxy-cache]:  https://github.com/sylus/registry-proxy-cache
 [drupal-site-layer]:            docker/Dockerfile
 [drupal-site-ci-layer]:         docker/images/ci/Dockerfile
 [drupal-site-cron-layer]:       docker/images/cron/Dockerfile
@@ -458,11 +458,10 @@ pulled to be transparently saved locally for subsequent docker pulls.
 [lightning]:                    https://github.com/acquia/lightning
 [kitematic]:                    https://www.docker.com/products/docker-kitematic
 [mailhog]:                      https://github.com/mailhog/MailHog
-[nginx-consul-template]:        https://github.com/drupalwxt/nginx-consul-template
 [open_social]:                  https://www.drupal.org/project/social
 [panopoly]:                     https://github.com/panopoly/panopoly
 [registrator]:                  https://github.com/gliderlabs/registrator
-[selenium]:                     https://github.com/drupalwxt/selenium
+[selenium]:                     https://github.com/drupal-composer-ext/selenium
 [selenium-grid]:                http://www.seleniumhq.org/projects/grid
 [selenium-node]:                https://github.com/SeleniumHQ/selenium
 [site-open-data]:               https://github.com/open-data/site-open-data
